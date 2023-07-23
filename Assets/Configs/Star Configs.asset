@@ -13,22 +13,24 @@ MonoBehaviour:
   m_Name: Star Configs
   m_EditorClassIdentifier: 
   Configs:
-  - TemperatureRange:
+  - StarTypeName: Star Type 1
+    TemperatureRange:
       Min: 0
       Max: 0
-    PrefabVariables:
-    - {fileID: -1345793011857437227, guid: 38998f4f5f60ca245b317e429d932198, type: 3}
-    - {fileID: 2356121175153693228, guid: 40cf673ffa47dbd49a8a00570ad21e01, type: 3}
+    Prefab: {fileID: 3481446840431397845, guid: 38998f4f5f60ca245b317e429d932198,
+      type: 3}
     Type: 0
-  - TemperatureRange:
+  - StarTypeName: Star Type 2
+    TemperatureRange:
       Min: 0
       Max: 0
-    PrefabVariables:
-    - {fileID: 5517078308336105921, guid: c306bae4b2e84504b96665e4cbaa7e89, type: 3}
+    Prefab: {fileID: 2860733658347437551, guid: c306bae4b2e84504b96665e4cbaa7e89,
+      type: 3}
     Type: 1
-  - TemperatureRange:
+  - StarTypeName: Star Type 3
+    TemperatureRange:
       Min: 0
       Max: 0
-    PrefabVariables:
-    - {fileID: -6457745650370450703, guid: cf1c7b5827f11504eb7ae19f745d435c, type: 3}
+    Prefab: {fileID: 7569653185505359623, guid: cf1c7b5827f11504eb7ae19f745d435c,
+      type: 3}
     Type: 2

@@ -4,10 +4,10 @@ using UnityEngine;
 namespace GalacticSystems
 {
     [Serializable]
-    public class StarConfigItem
+    public abstract class SpaceObjectConfigItem
     {
         public NumberRange TemperatureRange;
-        public StarSystemBehavior[] PrefabVariables;
-        public StarType Type;
+        public GameObject Prefab;
+        public NumberRange PlanetAmounts;
     }
 }
