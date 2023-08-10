@@ -3,18 +3,17 @@ using UnityEngine;
 
 namespace Ui
 {
-    [RequireComponent(typeof(Canvas)), DisallowMultipleComponent]
+    [RequireComponent(typeof(Canvas))]
     public abstract class UiWindow : MonoBehaviour
     {
-        private Canvas _canvas;
-        public UiWindowType Type;
+        protected Canvas _canvas;
 
-        private void Awake()
+        public event Action OnHide;
+
+        protected virtual void Awake()
         {
             _canvas = GetComponent<Canvas>();
         }
-
-        protected virtual void Init() { }
 
         public virtual void Show()
         {
@@ -24,6 +23,7 @@ namespace Ui
         public virtual void Hide()
         {
             _canvas.enabled = false;
+            OnHide?.Invoke();
         }
     }
 }
