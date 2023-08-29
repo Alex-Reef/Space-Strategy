@@ -2,6 +2,9 @@ namespace Ui
 {
     public enum UiWindowType
     {
-        StarSystemInfo
+        StarSystemInfo,
+        TopPanel,
+        BottomPanel,
+        RightPanel
     }
 }

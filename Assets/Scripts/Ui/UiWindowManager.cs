@@ -8,7 +8,6 @@ namespace Ui
         [SerializeField] private UiWindowItem[] _windows;
 
         private Dictionary<int, UiWindow> _uiWindows;
-        private UiWindow _currentWindow;
 
         private void Awake()
         {
@@ -17,6 +16,25 @@ namespace Ui
             {
                 _uiWindows.Add((int)_windows[i].type, _windows[i].window);
             }
+        }
+
+        public UiWindowType[] GetAllWindow(bool onlyActive = false)
+        {
+            List<UiWindowType> windowTypes = new List<UiWindowType>();
+            foreach (var uiWindow in _uiWindows)
+            {
+                if (onlyActive)
+                {
+                    if (uiWindow.Value.IsActive)
+                        windowTypes.Add((UiWindowType)uiWindow.Key);
+                }
+                else
+                {
+                    windowTypes.Add((UiWindowType)uiWindow.Key);
+                }
+            }
+
+            return windowTypes.ToArray();
         }
 
         public void ShowWindow(UiWindowType type)
@@ -33,6 +51,16 @@ namespace Ui
             {
                 window.Hide();
             }
+        }
+
+        public bool IsActive(UiWindowType type)
+        {
+            if (_uiWindows.TryGetValue((int)type, out var window))
+            {
+                return window.IsActive;
+            }
+
+            return false;
         }
     }
 }

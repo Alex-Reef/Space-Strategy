@@ -31,11 +31,5 @@ namespace Ui
         {
             _data = data;
         }
-
-        public override void Show()
-        {
-            Debug.Log(_data.systemName);
-            base.Show();
-        }
     }
 }

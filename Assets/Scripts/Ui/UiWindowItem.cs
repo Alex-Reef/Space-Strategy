@@ -5,7 +5,7 @@ namespace Ui
     [Serializable]
     public struct UiWindowItem
     {
-        public UiWindowType type;
         public UiWindow window;
+        public UiWindowType type;
     }
 }

@@ -21,11 +21,11 @@ namespace GalaxySystem.Behavior
         [SerializeField] private StarConfig starConfig;
         [SerializeField] private PlanetConfig planetConfig;
         
-        [SerializeField] private StarSystemBehavior starSystemPrefab;
+        [SerializeField] private GameObject starSystemPrefab;
         
         private Dictionary<StarType, StarConfigItem> _cashedStarConfigs;
         private Dictionary<PlanetsType, PlanetConfigItem> _cashedObjectsConfigs;
-        public Dictionary<int, StarSystemBehavior> SystemsBehaviors { get; private set; }
+        public Dictionary<int, GameObject> SystemsBehaviors { get; private set; }
         
         private StarSystemData[] _starSystemsData;
         public StarSystemData[] StarSystemsData => _starSystemsData;
@@ -140,7 +140,7 @@ namespace GalaxySystem.Behavior
         private IEnumerator SpawnStarSystems()
         {
             int length = _starSystemsData.Length;
-            SystemsBehaviors = new Dictionary<int, StarSystemBehavior>();
+            SystemsBehaviors = new Dictionary<int, GameObject>();
             for (int i = 0; i < length; i++)
             {
                 if (_starSystemsData[i].position == Vector3.zero)
@@ -183,9 +183,9 @@ namespace GalaxySystem.Behavior
             if (_cashedStarConfigs.TryGetValue(data.type, out StarConfigItem configItem))
             {
                 var behavior = Instantiate(starSystemPrefab, _galaxyTransform);
-                behavior.Init(data.systemName, data.systemId);
+                behavior.GetComponent<StarSystemView>().Init(data.systemName);
                 behavior.transform.position = data.position;
-                behavior.OnSelected += OnSystemSelected;
+                behavior.GetComponent<ClickableObject>().OnClicked += () => OnSystemSelected(data.systemId);
                 Instantiate(configItem.Object, behavior.transform);
                 SystemsBehaviors.Add(data.systemId, behavior);
             }
@@ -200,7 +200,7 @@ namespace GalaxySystem.Behavior
         {
             if(_locked) return;
             _locked = true;
-            Observable.FromMicroCoroutine(RemoveStars);
+            Observable.FromMicroCoroutine(RemoveStars).Subscribe();
         }
 
         private IEnumerator RemoveStars()
